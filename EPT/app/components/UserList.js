@@ -4,8 +4,8 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
+import UserDetail from './UserDetail';
 
-//http://172.16.17.98/ept/Person/GetUsers
 
 class UserList extends Component {
 
@@ -17,11 +17,17 @@ class UserList extends Component {
 
         console.log("hello süm");
     }
+
+    renderUsers(){
+       return  this.state.users.map(user=>
+       <UserDetail key={user.ID} user={user} />
+    );
+    }
     render() {
         console.log(this.state);
         return (
             <View >
-                <Text >User List</Text>
+                {this.renderUsers()}
             </View>
         );
     }
