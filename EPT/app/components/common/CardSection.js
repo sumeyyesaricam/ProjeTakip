@@ -14,13 +14,14 @@ const CardSection = (props) => {
 const styles = {
     containerStyle: {
         borderBottomWidth: 1,
-        padding:5,
-        backgroundColor:'#fff',
-        justifyContent:'flex-start',
-        flexDirection:'row',
-        position:'relative',
-        borderColor: '#ddd'
-
+        padding: 5,
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        position: 'relative',
+        borderColor: '#ddd',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     }
 }
-export default CardSection;
+export { CardSection };

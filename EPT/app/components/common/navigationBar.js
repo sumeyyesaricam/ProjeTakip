@@ -1,12 +1,8 @@
 
 import React from 'react';
 import {
-  Platform,
-  StyleSheet,
   Text,
   View,
-  TextInput,
-  Button
 } from 'react-native';
 
 export default class NavigationBar extends React.Component{

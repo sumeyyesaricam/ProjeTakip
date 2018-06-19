@@ -6,23 +6,16 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
   View,
-  TextInput,
-  Button
 } from 'react-native';
-import { NavigationBar } from './app/components';
-import Header from './app/components/header';
+import Header from './app/components/Header';
 import UserList from './app/components/UserList';
-export default class App extends Component {
-  goLogin() {
 
-  }
+export default class App extends Component {
+  
   render() {
     return (
-      <View >
+      <View style={{ flex: 1 }}>
         <Header headerText={'Görevlerim'} />
         <UserList />
       </View>

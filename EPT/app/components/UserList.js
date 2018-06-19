@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Text, View
+    Text, View,ScrollView
 } from 'react-native';
 
 import axios from 'axios';
@@ -13,10 +13,10 @@ class UserList extends Component {
 
     componentWillMount() {
         console.log("hello sümeyye");
-        axios.get('http://192.168.1.104/sirge/api/Users/GetUsers')
+        //axios.get('http://192.168.1.104/sirge/api/Users/GetUsers')
+            //.then(response => this.setState({ users: response.data }));
+        axios.get('http://172.16.17.98/ept/Person/GetUsers')
             .then(response => this.setState({ users: response.data }));
-        //axios.get('http://172.16.17.98/ept/Person/GetUsers')
-          //  .then(response => this.setState({ users: response.data }));
 
         console.log("hello süm");
     }
@@ -29,9 +29,9 @@ class UserList extends Component {
     render() {
         console.log(this.state);
         return (
-            <View >
+            <ScrollView >
                 {this.renderUsers()}
-            </View>
+            </ScrollView>
         );
     }
 }

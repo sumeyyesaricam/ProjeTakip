@@ -27,4 +27,4 @@ const styles= {
         fontSize:24,
     }
 };
-export default Header;
+export {Header} ;
