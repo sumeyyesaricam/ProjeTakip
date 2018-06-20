@@ -1,4 +1,4 @@
-package com.ept;
+package com.hellonative;
 
 import android.app.Application;
 

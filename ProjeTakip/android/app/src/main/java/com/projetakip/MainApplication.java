@@ -1,4 +1,4 @@
-package com.ept;
+package com.projetakip;
 
 import android.app.Application;
 
