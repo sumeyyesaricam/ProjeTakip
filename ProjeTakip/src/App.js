@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
-import {
-    View
-} from 'react-native';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import firebase from 'firebase';
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import { Header } from './component/common';
-import LibraryList from './component/LibraryList';
+import Router from './config/Router';
 
 export default class App extends Component {
+
+    componentWillMount() {
+        var config = {
+            apiKey: 'AIzaSyA81rpIFOOWBjtlzuufB0jflcDLw0PR20s',
+            authDomain: 'emiprojetakip.firebaseapp.com',
+            databaseURL: 'https://emiprojetakip.firebaseio.com',
+            projectId: 'emiprojetakip',
+            storageBucket: 'emiprojetakip.appspot.com',
+            messagingSenderId: '171461503499'
+        };
+        firebase.initializeApp(config);
+    }
     render() {
+        const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
         return (
-            <Provider store={createStore(reducers)}>
-                <View style={{flex:1}}>
-                    <Header headerText="Hello World" />
-                    <LibraryList />
-                </View>
+            <Provider store={store}>
+                <Router />
             </Provider>
         );
     }

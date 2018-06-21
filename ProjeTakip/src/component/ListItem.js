@@ -9,7 +9,6 @@ import * as actions from '../actions';
 class LisItem extends Component {
 
     componentWillUpdate() {
-        console.log("Update ");
         LayoutAnimation.spring();
     }
     renderDescription() {
