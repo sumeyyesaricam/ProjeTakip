@@ -5,6 +5,8 @@ import {
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { Actions } from 'react-native-router-flux';
+
 
 class LoginForm extends Component {
     onEmailChange(text) {
@@ -16,7 +18,7 @@ class LoginForm extends Component {
     onButtonPress() {
         const { email, password } = this.props;
         this.props.loginUser({ email, password });
-        
+        //Actions.main();
     }
     renderError() {
         if (this.props.error) {

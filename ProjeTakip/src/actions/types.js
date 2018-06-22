@@ -5,4 +5,7 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 export const TASK_UPDATE = 'task_update';
 export const TASK_CREATE = 'task_create';
+export const TASK_FETCH_SUCCESS = 'task_fetch_success';
+
+
 
