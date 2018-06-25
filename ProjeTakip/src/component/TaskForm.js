@@ -8,7 +8,6 @@ import { taskUpdate, taskCreate } from '../actions';
 
 
 class TaskForm extends Component {
-   
     render() {
         return (
             <View>

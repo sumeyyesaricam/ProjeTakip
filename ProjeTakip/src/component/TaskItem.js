@@ -9,15 +9,15 @@ import * as actions from '../actions';
 
 class TaskItem extends Component {
 
-    onRowPress() {
+    onRowTaskPress() {
         Actions.taskEdit({ task: this.props.task });
     }
     render() {
         const { name } = this.props.task;
-
         return (
+
             <TouchableWithoutFeedback
-                onPress={() => this.onRowPress.bind(this)}
+                onPress={this.onRowTaskPress.bind(this)}
             >
                 <View>
                     <CardSection>
@@ -25,9 +25,9 @@ class TaskItem extends Component {
                             {name}
                         </Text>
                     </CardSection>
-                   
+
                 </View>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback >
         );
     }
 }

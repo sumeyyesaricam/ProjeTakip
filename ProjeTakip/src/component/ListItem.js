@@ -24,7 +24,6 @@ class LisItem extends Component {
         }
     }
     render() {
-        console.log("render");
         const { id, title } = this.props.library;
 
         return (
