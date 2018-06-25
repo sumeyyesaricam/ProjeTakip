@@ -17,7 +17,6 @@ class LibraryList extends Component {
         return <ListItem library={library}/>;
     }
     render() {
-        console.log(this.props);
         return (
             <ListView dataSource={this.dataSource}
                 renderRow={this.renderRow} />

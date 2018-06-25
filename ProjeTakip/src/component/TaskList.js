@@ -1,42 +1,41 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import {
-    View, Text, ListView
+     ListView
 } from 'react-native';
 import { connect } from 'react-redux';
 import { taskFetch } from '../actions';
-
+import TaskItem from './TaskItem';
 
 
 class TaskList extends Component {
    componentWillMount() {
         this.props.taskFetch();
-        console.log("Süm");
-        debugger;
         this.createDataSource(this.props);
     }
      componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps);
     }
-    createDataSource({ tasks }) {
-        const ds = ListView.DataSource({
+    createDataSource(nextProps) {
+        const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.dataSource = ds.cloneWithRows(tasks);
+        this.dataSource = ds.cloneWithRows(nextProps.tasks);
+    }
+    renderRow(task) {
+        return <TaskItem task={task}/>;
     }
     render() {
-        console.log(this.props);
+        console.log(this.props.tasks);
         return (
-            <View>
-               
-            </View>
+            <ListView dataSource={this.dataSource}
+                renderRow={this.renderRow} />
         );
     };
 }
 
-const mapStateProps = (state) => {
-    debugger;
-    const  tasks  = _.map(state.tasks,(val,uid)=>{
+const mapStateProps = ({taskListResponse}) => {
+    const  tasks  = _.map(taskListResponse,(val,uid)=>{
         return {...val,uid}
     });
     return { tasks };

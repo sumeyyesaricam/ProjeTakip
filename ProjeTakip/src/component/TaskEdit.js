@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import {
     View, Text, Picker
 } from 'react-native';
 import { Card, CardSection, Button, Input } from './common';
 import { connect } from 'react-redux';
-import { taskUpdate, taskCreate } from '../actions';
+import { taskEdit } from '../actions';
 import TaskForm from './TaskForm';
 
 
-class TaskCreate extends Component {
+class TaskEdit extends Component {
+    componentWillMount() {
+        _.each(this.props.task,(value,prop)=>{
+            this.props.taskEdit({prop,value});
+        });
+    }
     onButtonPress() {
         const { name, phone, shift } = this.props;
-        this.props.taskCreate({ name, phone, shift:shift || 'Monday' });
+        this.props.taskEdit({ name, phone, shift: shift || 'Monday' });
     }
     render() {
         return (
@@ -19,7 +25,12 @@ class TaskCreate extends Component {
                 <TaskForm {...this.props} />
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
-                        Kaydet
+                        Güncelle
+            </Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={this.onButtonPress.bind(this)}>
+                        Sil
             </Button>
                 </CardSection>
             </Card>
@@ -36,4 +47,4 @@ const mapStateProps = (state) => {
     const { name, phone, shift } = state.taskForm;
     return { name, phone, shift };
 }
-export default connect(mapStateProps, { taskUpdate, taskCreate })(TaskCreate);
+export default connect(mapStateProps, { taskEdit })(TaskEdit);

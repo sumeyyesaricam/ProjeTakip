@@ -9,6 +9,7 @@ export default combineReducers({
     auth:AuthReducer,
     taskForm:TaskFormReducer,
     libraries: LibraryReducer,
-    tasks:TaskReducer,
-    selectedLibraryId:SelectionReducer
+    taskListResponse:TaskReducer,
+    selectedLibraryId:SelectionReducer,
+    
 })
