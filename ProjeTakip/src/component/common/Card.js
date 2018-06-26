@@ -19,11 +19,10 @@ const styles = {
         borderColor: '#ddd',
         borderBottomWidth: 0,
         shadowColor: '#000',
-        shadowRadius:2,
-        elevation:10,
+        shadowRadius: 2,
+        elevation: 10,
         marginLeft: 5,
         marginRight: 5,
-
     }
 }
-export {Card};
+export { Card };

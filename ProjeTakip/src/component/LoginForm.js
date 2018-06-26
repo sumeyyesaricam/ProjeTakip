@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
-    View, Text
+    View, Text, Image
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, CardSection, Input, Button, Spinner, BackgroundImage } from './common';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Actions } from 'react-native-router-flux';
 
 
 class LoginForm extends Component {
@@ -42,27 +41,30 @@ class LoginForm extends Component {
     }
     render() {
         return (
-            <Card>
-                <CardSection>
-                    <Input
-                        label="Email"
-                        placeholder="email@gmail.com"
-                        onChangeText={this.onEmailChange.bind(this)}
-                        value={this.props.email} />
-                </CardSection>
-                <CardSection>
-                    <Input
-                        label="Şifre"
-                        placeholder="şifre"
-                        secureTextEntry
-                        onChangeText={this.onPasswordChange.bind(this)}
-                        value={this.props.password} />
-                </CardSection>
-                {this.renderError()}
-                <CardSection>
-                    {this.renderButton()}
-                </CardSection>
-            </Card>
+        <BackgroundImage >
+                    <Card >
+                        <CardSection>
+                            <Image source={require('../img/logo.jpg')} style={{ justifyContent: 'center', alignItems: 'center' }} />
+                        </CardSection>
+                        <CardSection>
+                            <Input
+                                label="Email"
+                                onChangeText={this.onEmailChange.bind(this)}
+                                value={this.props.email} />
+                        </CardSection>
+                        <CardSection>
+                            <Input
+                                label="Şifre"
+                                secureTextEntry
+                                onChangeText={this.onPasswordChange.bind(this)}
+                                value={this.props.password} />
+                        </CardSection>
+                        {this.renderError()}
+                        <CardSection>
+                            {this.renderButton()}
+                        </CardSection>
+                    </Card>
+            </BackgroundImage>
         );
     }
 }
@@ -71,6 +73,12 @@ const styles = {
         fontSize: 16,
         alignSelf: 'center',
         color: 'red'
+    }, backgroundImage: {
+        flexGrow:1,
+        height:null,
+        width:null,
+        alignItems: 'center',
+        justifyContent:'center',
     }
 }
 const mapStateProps = ({ auth }) => {

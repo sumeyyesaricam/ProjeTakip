@@ -12,7 +12,7 @@ class RouterComponent extends Component {
             <Router>
                 <Scene key="root" hideNavBar>
                     <Scene key="auth">
-                        <Scene key="login" component={LoginForm} title="Please Login"  />
+                        <Scene key="login" component={LoginForm}  />
                     </Scene>
                     <Scene key="main">
                         <Scene rightTitle="Add"

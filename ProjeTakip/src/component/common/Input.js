@@ -19,8 +19,7 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
                 value={value}
                 autoCorrect={false}
                 placeholder={placeholder}
-                onChangeText={onChangeText}
-                style={{ width: 100, height: 40 }} />
+                onChangeText={onChangeText} />
         </View>
     );
 }
@@ -29,7 +28,7 @@ const styles = {
         color: '#000',
         fontSize: 18,
         lineHeight: 23,
-        flex: 5
+        flex: 2
     },
     labelStyle: {
         fontSize: 18,

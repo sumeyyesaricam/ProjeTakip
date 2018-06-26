@@ -8,7 +8,6 @@ import { Card, CardSection, Button, Confirm } from './common';
 import { connect } from 'react-redux';
 import { taskUpdate, taskSave, taskDelete } from '../actions';
 import TaskForm from './TaskForm';
-import Confirm1 from './Confirm1';
 
 class TaskEdit extends Component {
      
@@ -22,28 +21,16 @@ class TaskEdit extends Component {
         const { name, phone, shift } = this.props;
         this.props.taskSave({ name, phone, shift, uid: this.props.task.uid });
     }
-    onTextPress() {
-        const { name, phone, shift } = this.props;
-
-    }
-    onAccept() {
-        const { name, phone, shift } = this.props;
-
-    }
-    onDecline() {
-        this.setState({ showModal: false })
-
-    }
+   
     
     ConfirmDelete= () => {
 
         Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
+            'Uyarı',
+            'Silmek istediğinden emin misin?',
             [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
+              {text: 'İptal', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () =>  this.props.taskDelete({ uid:this.props.task.uid })},
             ],
             { cancelable: false }
           )
@@ -58,14 +45,8 @@ class TaskEdit extends Component {
                         Güncelle
                     </Button>
                 </CardSection>
-                <CardSection>          
-                    <Button onPress={this.onTextPress.bind(this)}>
-                        Gönder
-                    </Button>
-                </CardSection>
                 <CardSection>
-                    <Button onPress={this.ShowAlertDialog}>
-                    
+                    <Button onPress={this.ConfirmDelete}>
                         Sil
                     </Button>
                 </CardSection>
