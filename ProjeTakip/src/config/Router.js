@@ -12,16 +12,17 @@ class RouterComponent extends Component {
             <Router>
                 <Scene key="root" hideNavBar>
                     <Scene key="auth">
-                        <Scene key="login" component={LoginForm}  />
+                        <Scene key="login" component={LoginForm} />
                     </Scene>
                     <Scene key="main">
-                        <Scene rightTitle="Add"
+                        <Scene
+                            rightButtonImage={require('../img/heart1.png')}
                             onRight={() => Actions.taskCreate()}
                             key="taskList"
                             component={TaskList}
-                            title="Tasks" initial/>
-                        <Scene key="taskCreate" component={TaskCreate} title="Create Task"  />
-                        <Scene key="taskEdit" component={TaskEdit} title="Edit Task"  />
+                            title="Bana Atanan Görevler" initial />
+                        <Scene key="taskCreate" component={TaskCreate} title="Create Task" />
+                        <Scene key="taskEdit" component={TaskEdit} title="Edit Task" />
 
                     </Scene>
                 </Scene>

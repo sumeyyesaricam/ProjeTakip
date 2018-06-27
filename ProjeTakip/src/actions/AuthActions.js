@@ -1,10 +1,14 @@
 import firebase from 'firebase';
 import {
+    Text, View, Alert
+} from 'react-native';
+import {
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    LOGIN_USER
+    LOGIN_USER,
+    BASE_URL
 } from './types';
 import { Actions } from 'react-native-router-flux';
 
@@ -33,13 +37,34 @@ export const loginUser = ({ email, password }) => {
         dispatch({
             type: LOGIN_USER
         });
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        fetch(BASE_URL + '/Person/Login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "Username": email,
+                "Password": password,
+                "RegId": "",
+            })
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson.id !== null && responseJson.id !== "") {
+                    loginUserSuccess(dispatch, responseJson.id)
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+        /*firebase.auth().signInWithEmailAndPassword(email, password)
             .then(user => loginUserSuccess(dispatch, user))
             .catch(() => {
                 firebase.auth().createUserWithEmailAndPassword(email, password)
                     .then(user => loginUserSuccess(dispatch, user))
                     .catch(() => loginUserFail(dispatch));
-            });
+            });*/
     };
 }
 
