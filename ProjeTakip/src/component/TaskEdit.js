@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import {
-    View, Text, Picker,Alert
+    View, Text, Picker, Alert
 } from 'react-native';
 import Communications from 'react-native-communications';
-import { Card, CardSection, Button, Confirm } from './common';
+import { Card, CardSection, Button, NavBar, Input } from './common';
 import { connect } from 'react-redux';
 import { taskUpdate, taskSave, taskDelete } from '../actions';
 import TaskForm from './TaskForm';
 
 class TaskEdit extends Component {
-     
+
     state = { showModal: false }
     componentWillMount() {
         _.each(this.props.task, (value, prop) => {
@@ -18,40 +18,49 @@ class TaskEdit extends Component {
         });
     }
     onButtonPress() {
-        const { name, phone, shift } = this.props;
-        this.props.taskSave({ name, phone, shift, uid: this.props.task.uid });
-    }
-   
-    
-    ConfirmDelete= () => {
-
-        Alert.alert(
-            'Uyarı',
-            'Silmek istediğinden emin misin?',
-            [
-              {text: 'İptal', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () =>  this.props.taskDelete({ uid:this.props.task.uid })},
-            ],
-            { cancelable: false }
-          )
+        const { Title, Description, AssignsName } = this.props;
+        this.props.taskSave({ Title, Description, AssignsName, uid: this.props.task.ID });
     }
     render() {
-        
         return (
-            <Card>
-                <TaskForm {...this.props} />
-                <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        Güncelle
+            <View>
+                <NavBar />
+                <Card>
+                    <CardSection>
+                        <Text >
+                            {this.props.Title}
+                        </Text>
+                    </CardSection>
+                    <CardSection >
+                        <Input
+                            label="Atayan Kişi"
+                            value={this.props.AssignsName}
+                            onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                            label="Açıklama"
+                            value={this.props.Description}
+                            onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                            label="Dosya Ekle"
+                            value={this.props.Description}
+                            onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={this.onButtonPress.bind(this)}>
+                            Güncelle
                     </Button>
-                </CardSection>
-                <CardSection>
-                    <Button onPress={this.ConfirmDelete}>
-                        Sil
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={this.ConfirmDelete}>
+                            Sil
                     </Button>
-                </CardSection>
-
-            </Card>
+                    </CardSection>
+                </Card>
+            </View>
         );
     };
 }
@@ -62,7 +71,7 @@ const styles = {
     }
 }
 const mapStateProps = (state) => {
-    const { name, phone, shift } = state.taskForm;
-    return { name, phone, shift };
+    const { Title, Description, AssignsName } = state.taskForm;
+    return { Title, Description, AssignsName };
 }
 export default connect(mapStateProps, { taskUpdate, taskSave, taskDelete })(TaskEdit);

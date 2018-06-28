@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    View, Text, Picker
+    View, Text
 } from 'react-native';
 import { Card, CardSection, Input } from './common';
 import { connect } from 'react-redux';
@@ -12,36 +12,39 @@ class TaskForm extends Component {
         return (
             <View>
                 <CardSection>
-                    <Input
-                        label="İsim"
-                        value={this.props.name}
-                        onChangeText={value => this.props.taskUpdate({ prop: 'name', value })} />
+                    <Text >
+                        {this.props.Title}{'\n'}{'\n'}
+                    </Text>
+                </CardSection>
+                <CardSection>
+                    <Text >
+                        {this.props.Description}{'\n'}{'\n'}
+                    </Text>
+                </CardSection>
+                <CardSection>
+                    <Text >
+                        {this.props.Description}{'\n'}{'\n'}
+                    </Text>
                 </CardSection>
                 <CardSection>
                     <Input
-                        label="Telefon No"
-                        value={this.props.phone}
+                        label="Açıklama"
+                        value={this.props.Description}
                         onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
                 </CardSection>
                 <CardSection >
-                    <Picker style={{ flex: 1 }}
-                        selectedValue={this.props.shift}
-                        onValueChange={day => this.props.taskUpdate({ prop: 'shift', value: day })}>
-                        <Picker.Item label="Pazartesi" value="Monday" />
-                        <Picker.Item label="Salı" value="Tuesday" />
-                        <Picker.Item label="Çarşamba" value="Wednesday" />
-                        <Picker.Item label="Perşembe" value="Thursday" />
-                        <Picker.Item label="Cuma" value="Friday" />
-                        <Picker.Item label="Cumartesi" value="Saturday" />
-                        <Picker.Item label="Pazar" value="Sunday" />
-                    </Picker>
+                    <Input
+                        label="Atayan Kişi"
+                        value={this.props.AssignsName}
+                        onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
+
                 </CardSection>
             </View>
         );
     };
 }
 const mapStateProps = (state) => {
-    const { name, phone, shift } = state.taskForm;
-    return { name, phone, shift };
+    const { name, phone, AssignsName } = state.taskForm;
+    return { name, phone, AssignsName };
 }
 export default connect(mapStateProps, { taskUpdate, taskCreate })(TaskForm);

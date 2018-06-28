@@ -12,7 +12,7 @@ import TaskItem from './TaskItem';
 
 class TaskList extends Component {
     componentWillMount() {
-        this.props.taskFetch();
+        this.props.taskFetch({personid:1});
         this.createDataSource(this.props);
     }
     componentWillReceiveProps(nextProps) {
@@ -28,9 +28,8 @@ class TaskList extends Component {
         return <TaskItem task={task} />;
     }
     render() {
-        console.log(this.props.tasks);
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: 'white' }} >
                 <ListView
                     enableEmptySections={true}
                     dataSource={this.dataSource}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    View, LayoutAnimation, Text, TouchableWithoutFeedback
+    View, Icon, Text, TouchableWithoutFeedback, TouchableHighlight, Image
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -10,19 +10,22 @@ import * as actions from '../actions';
 class TaskItem extends Component {
 
     onRowTaskPress() {
-        Actions.taskEdit({ task: this.props.task });
+        Actions.taskDetail({ task: this.props.task });
     }
     render() {
-        const { name } = this.props.task;
+        const { Title } = this.props.task;
         return (
 
             <TouchableWithoutFeedback
                 onPress={this.onRowTaskPress.bind(this)}
             >
-                <View>
+                <View >
                     <CardSection>
-                        <Text style={{ flex: 1 }}>
-                            {name}
+                        <TouchableHighlight style={{ marginLeft: 5, flex: 1 }} onPress={() => console.log("icon press")}>
+                            <Image source={require('../img/tick.png')} />
+                        </TouchableHighlight>
+                        <Text style={{ flex: 6, marginTop: 5, justifyContent: 'center', alignItems: 'center' }}>
+                            {Title}
                         </Text>
                     </CardSection>
 
@@ -33,7 +36,7 @@ class TaskItem extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const expanded = state.selectedLibraryId === ownProps.task.uid;
+    const expanded = state.selectedLibraryId === ownProps.task.ID;
     return { expanded };
 }
 

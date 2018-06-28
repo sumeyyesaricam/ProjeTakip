@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
-    View, Text, Picker
+    View, Text, Picker, TouchableHighlight, Image
 } from 'react-native';
-import { Card, CardSection, Button, Input } from './common';
+import { Card, CardSection, Button, Input, NavBar } from './common';
 import { connect } from 'react-redux';
 import { taskUpdate, taskCreate } from '../actions';
 import TaskForm from './TaskForm';
@@ -11,18 +11,21 @@ import TaskForm from './TaskForm';
 class TaskCreate extends Component {
     onButtonPress() {
         const { name, phone, shift } = this.props;
-        this.props.taskCreate({ name, phone, shift:shift || 'Monday' });
+        this.props.taskCreate({ name, phone, shift: shift || 'Monday' });
     }
     render() {
         return (
-            <Card>
-                <TaskForm {...this.props} />
-                <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        Kaydet
-            </Button>
-                </CardSection>
-            </Card>
+            <View>
+                <NavBar />
+                <Card>
+                    <TaskForm {...this.props} />
+                    <CardSection>
+                        <Button onPress={this.onButtonPress.bind(this)}>
+                            Kaydet
+                        </Button>
+                    </CardSection>
+                </Card>
+            </View>
         );
     };
 }

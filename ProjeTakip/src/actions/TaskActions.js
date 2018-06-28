@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { TASK_UPDATE, TASK_FETCH_SUCCESS, TASK_CREATE ,TASK_SAVE_SUCCESS} from './types';
+import axios from 'axios';
+import { TASK_UPDATE, TASK_FETCH_SUCCESS, TASK_CREATE ,TASK_SAVE_SUCCESS,BASE_URL} from './types';
 
 export const taskUpdate = ({ prop, value }) => {
     return {
@@ -22,16 +23,37 @@ export const taskCreate = ({ name, phone, shift }) => {
     }
 };
 
-export const taskFetch = () => {
-    const { currentUser } = firebase.auth();
+export const taskFetch = ({personid}) => {
+    //const { currentUser } = firebase.auth();
 
     return (dispatch) => {
+        const URL = BASE_URL+`?type=0&PersonID=${personid}`;
+        axios.get('http://192.168.168.2/ept/Task/GetTasks/?type=0&PersonID=1')
+            .then(response => { 
+                dispatch({
+                    type: TASK_FETCH_SUCCESS, payload: response.data
+                });
+            })
+            .catch((error) => {debugger;
+                console.error(error);
+            });
+         /*fetch(URL)
+         .then(response => {
+             debugger;
+            dispatch({
+                type: TASK_FETCH_SUCCESS, payload: response.data
+            });
+         })
+         .catch((error) => {debugger;
+             console.error(error);
+         });
+
         firebase.database().ref(`/users/${currentUser.uid}/tasks`)
             .on('value', snapshot => {
                 dispatch({
                     type: TASK_FETCH_SUCCESS, payload: snapshot.val()
                 });
-            });
+            });*/
     }
 };
 
