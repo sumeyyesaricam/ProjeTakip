@@ -15,17 +15,11 @@ class BackgroundImage extends Component {
     }
 }
 const styles = {
-    errorTextStyle: {
-        fontSize: 16,
-        alignSelf: 'center',
-        color: 'red'
-    }, backgroundImage: {
-        flexGrow:1,
-        height:null,
-        width:null,
-        flex:1,
-        alignItems: 'stretch',
-        justifyContent:'center',
+    backgroundImage: {
+        flexDirection: 'column',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 }
 export { BackgroundImage };

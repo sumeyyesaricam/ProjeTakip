@@ -1,45 +1,51 @@
 import React, { Component } from 'react';
 import {
-    Text, View, TextInput
+    Text, View, TextInput,Image
 } from 'react-native';
+import Dimensions from 'Dimensions';
 
 
+const Input = ({ value, onChangeText, placeholder, secureTextEntry ,source}) => {
 
-const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
-
-    const { inputStyle, labelStyle, containerStyle } = styles;
+    const { inputStyle, containerStyle } = styles;
     return (
         <View style={containerStyle}>
-            <Text style={labelStyle}>
-                {label}
-            </Text>
+            <Image source={source} style={styles.inlineImg} />
             <TextInput
                 secureTextEntry={secureTextEntry}
                 style={inputStyle}
                 value={value}
                 autoCorrect={false}
                 placeholder={placeholder}
-                onChangeText={onChangeText} />
+                onChangeText={onChangeText}
+                placeholderTextColor="white"
+                underlineColorAndroid="transparent" />
         </View>
     );
 }
+
+const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_HEIGHT = Dimensions.get('window').height;
+
 const styles = {
     inputStyle: {
-        color: '#000',
-        fontSize: 18,
-        lineHeight: 23,
-        flex: 2
-    },
-    labelStyle: {
-        fontSize: 18,
-        flex: 1,
-        paddingLeft: 20,
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+        width: DEVICE_WIDTH - 40,
+        height: 40,
+        marginHorizontal: 20,
+        paddingLeft: 45,
+        borderRadius: 20,
+        color: '#ffffff',
     },
     containerStyle: {
-        height: 40,
         flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center'
-    }
+    }, inlineImg: {
+        position: 'absolute',
+        zIndex: 99,
+        width: 22,
+        height: 22,
+        left: 35,
+        top: 9,
+    },
 }
 export { Input };

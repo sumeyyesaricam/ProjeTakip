@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
-    Text, View, TouchableHighlight, Image
+    Text, View, TouchableOpacity, Image
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection } from './CardSection';
+import { Card } from './Card';
 
 const NavBar = ({task}) => {
     ConfirmDelete = () => {
@@ -18,30 +19,30 @@ const NavBar = ({task}) => {
         )
     }
     return (
-        <View>
+        <Card>
             <CardSection>
-                <TouchableHighlight style={{ marginLeft: 250 }} onPress={() => {
+                <TouchableOpacity  style={{ marginLeft: 250 }} onPress={() => {
                     Actions.taskDetail({ task: {task} });
                 }}>
                     <Image source={require('../../img/tick.png')} />
-                </TouchableHighlight>
-                <TouchableHighlight style={{ marginLeft: 5 }} onPress={() => {
+                </TouchableOpacity >
+                <TouchableOpacity  style={{ marginLeft: 5 }} onPress={() => {
                     Actions.taskDetail({ task: {task} });
                 }}>
                     <Image source={require('../../img/like.png')} />
-                </TouchableHighlight>
-                <TouchableHighlight style={{ marginLeft: 5 }} onPress={() => {
+                </TouchableOpacity >
+                <TouchableOpacity  style={{ marginLeft: 5 }} onPress={() => {
                     Actions.taskEdit({ task: {task} });
                 }}>
                     <Image source={require('../../img/edit.png')} />
-                </TouchableHighlight>
-                <TouchableHighlight style={{ marginLeft: 5 }} onPress={() =>{
+                </TouchableOpacity >
+                <TouchableOpacity  style={{ marginLeft: 5 }} onPress={() =>{
                     {this.ConfirmDelete}
                 }}>
                     <Image source={require('../../img/setting.png')} />
-                </TouchableHighlight>
+                </TouchableOpacity >
             </CardSection>
-        </View>
+        </Card>
     );
 }
 export { NavBar };

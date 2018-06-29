@@ -15,7 +15,7 @@ class RouterComponent extends Component {
             <Router>
                 <Scene key="root" hideNavBar>
                     <Scene key="auth">
-                        <Scene key="login" hideNavBar  component={LoginForm} />
+                        <Scene key="login" hideNavBar component={LoginForm} />
                     </Scene>
                     <Scene key="main">
                         <Scene
@@ -23,10 +23,13 @@ class RouterComponent extends Component {
                             onRight={() => Actions.taskCreate()}
                             key="taskList"
                             component={TaskList}
-                            title="Bana Atanan Görevler" initial />
+                            title="Görevler" initial />
                         <Scene key="taskCreate" hideNavBar component={TaskCreate} title="Create Task" />
-                        <Scene key="taskEdit" hideNavBar component={TaskEdit} title="Edit Task" />
-                        <Scene key="taskDetail" hideNavBar component={TaskDetail}  />
+                        <Scene key="taskEdit"
+                            rightButtonImage={require('../img/tick.png')}
+                            onRight={() => Actions.taskCreate()}
+                            component={TaskEdit} title="Görevi Düzenle" />
+                        <Scene key="taskDetail" hideNavBar component={TaskDetail} />
 
                     </Scene>
                 </Scene>

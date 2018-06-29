@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import {
-    View, Text, Picker, Alert
+    View, Text, Image, ScrollView
 } from 'react-native';
 import Communications from 'react-native-communications';
 import { Card, CardSection, Button, NavBar, Input } from './common';
@@ -23,55 +23,71 @@ class TaskEdit extends Component {
     }
     render() {
         return (
-            <View>
-                <NavBar />
-                <Card>
+            <ScrollView style={{ backgroundColor: 'white' }}>
                     <CardSection>
-                        <Text >
+                        <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
                             {this.props.Title}
                         </Text>
                     </CardSection>
                     <CardSection >
-                        <Input
-                            label="Atayan Kişi"
-                            value={this.props.AssignsName}
-                            onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
+                        <View style={styles.editStyle}>
+                            <Image source={require('../img/person.png')} />
+                            <Input style={{ margin: 5 }}
+                                label="Atanan Kişi"
+                                value={this.props.AssignsName}
+                                onChangeText={text => this.props.taskUpdate({ prop: 'assignsName', value: text })} />
+                        </View>
+                    </CardSection>
+                    <CardSection >
+                        <View style={styles.editStyle}>
+                            <Image source={require('../img/calendar.png')} />
+                            <Input style={{ margin: 5 }}
+                                label="Bitiş Tarihi"
+                                value={this.props.AssignsName}
+                                onChangeText={text => this.props.taskUpdate({ prop: 'dueDate', value: text })} />
+                        </View>
                     </CardSection>
                     <CardSection>
-                        <Input
-                            label="Açıklama"
-                            value={this.props.Description}
-                            onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
+                        <View style={styles.editStyle}>
+                            <Image source={require('../img/description.png')} />
+                            <Input style={{ margin: 5 }}
+                                label="Açıklama"
+                                value={this.props.Description}
+                                onChangeText={text => this.props.taskUpdate({ prop: 'description', value: text })} />
+                        </View>
                     </CardSection>
                     <CardSection>
-                        <Input
-                            label="Dosya Ekle"
-                            value={this.props.Description}
-                            onChangeText={text => this.props.taskUpdate({ prop: 'phone', value: text })} />
+                        <View style={styles.editStyle}>
+                            <Image source={require('../img/project1.png')} />
+                            <Input style={{ margin: 5 }}
+                                label="Proje Adı"
+                                value={this.props.ProjectName}
+                                onChangeText={text => this.props.taskUpdate({ prop: 'projectName', value: text })} />
+                        </View>
                     </CardSection>
                     <CardSection>
-                        <Button onPress={this.onButtonPress.bind(this)}>
-                            Güncelle
-                    </Button>
+                        <View style={styles.editStyle}>
+                            <Image source={require('../img/file.png')} />
+                            <Input style={{ margin: 5 }}
+                                label="Dosya Ekle"
+                                value={this.props.Description}
+                                onChangeText={text => this.props.taskUpdate({ prop: 'file', value: text })} />
+                        </View>
                     </CardSection>
-                    <CardSection>
-                        <Button onPress={this.ConfirmDelete}>
-                            Sil
-                    </Button>
-                    </CardSection>
-                </Card>
-            </View>
+            </ScrollView>
         );
     };
 }
 const styles = {
-    pickerTextStyle: {
-        fontSize: 18,
-        paddingLeft: 20
+    editStyle: {
+        flexDirection: 'row',
+        flex: 1,
+        margin: 10,
+        alignItems: 'center'
     }
 }
 const mapStateProps = (state) => {
-    const { Title, Description, AssignsName } = state.taskForm;
-    return { Title, Description, AssignsName };
+    const { Title, Description, AssignsName,ProjectName } = state.taskForm;
+    return { Title, Description, AssignsName,ProjectName };
 }
 export default connect(mapStateProps, { taskUpdate, taskSave, taskDelete })(TaskEdit);
