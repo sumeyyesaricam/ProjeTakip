@@ -12,7 +12,7 @@ import TaskItem from './TaskItem';
 
 class TaskList extends Component {
     componentWillMount() {
-        this.props.taskFetch({personid:1});
+        this.props.taskFetch({ personid: 1 });
         this.createDataSource(this.props);
     }
     componentWillReceiveProps(nextProps) {

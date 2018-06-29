@@ -5,7 +5,8 @@ import {
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button, Spinner, BackgroundImage } from './common';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import person from '../img/person.png';
+import usernameIcon from '../img/username.png';
+import passwordIcon from '../img/password.png';
 
 class LoginForm extends Component {
     onEmailChange(text) {
@@ -45,11 +46,12 @@ class LoginForm extends Component {
                 <KeyboardAvoidingView behavior="padding" style={styles.container}>
                     <Image source={require('../img/logo.jpg')} style={{ justifyContent: 'center', alignItems: 'center' }} />
                     <Input
-                        source={person}
+                        source={usernameIcon}
                         label="Email"
                         onChangeText={this.onEmailChange.bind(this)}
                         value={this.props.email} />
                     <Input
+                        source={passwordIcon}
                         label="Şifre"
                         secureTextEntry
                         onChangeText={this.onPasswordChange.bind(this)}

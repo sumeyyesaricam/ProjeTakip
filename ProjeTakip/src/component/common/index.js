@@ -8,6 +8,4 @@ export * from './Spinner';
 export * from './Confirm';
 export * from './BackgroundImage';
 export * from './NavBar';
-export * from './CustomButton';
-export * from './WallPaper';
 

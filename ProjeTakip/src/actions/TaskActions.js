@@ -34,7 +34,7 @@ export const taskFetch = ({personid}) => {
                     type: TASK_FETCH_SUCCESS, payload: response.data
                 });
             })
-            .catch((error) => {debugger;
+            .catch((error) => {
                 console.error(error);
             });
          /*fetch(URL)

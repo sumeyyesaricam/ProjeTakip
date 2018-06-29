@@ -38,7 +38,7 @@ const styles = {
         color: '#ffffff',
     },
     containerStyle: {
-        flex: 1,
+        margin:10
     }, inlineImg: {
         position: 'absolute',
         zIndex: 99,

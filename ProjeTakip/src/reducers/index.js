@@ -4,6 +4,7 @@ import SelectionReducer from './SelectionReducer';
 import AuthReducer from './AuthReducer';
 import TaskFormReducer from './TaskFormReducer';
 import TaskReducer from './TaskReducer';
+import UserReducer from './UserReducer';
 
 export default combineReducers({
     auth:AuthReducer,
@@ -11,5 +12,6 @@ export default combineReducers({
     libraries: LibraryReducer,
     taskListResponse:TaskReducer,
     selectedLibraryId:SelectionReducer,
+    userListResponse:UserReducer,
     
 })
