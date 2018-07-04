@@ -3,9 +3,9 @@ import {
     View, Text, TextInput, TouchableOpacity, Image, ListView, ScrollView
 } from 'react-native';
 import _ from 'lodash';
+import { Akira } from 'react-native-textinput-effects';
 import LabelSelect from 'react-native-label-select';
 import ModalFilterPicker from 'react-native-modal-filter-picker'
-import { Card, CardSection, Button } from './common';
 import { connect } from 'react-redux';
 import { taskUpdate, taskCreate, userFetch, projectFetch, addUser } from '../actions';
 
@@ -35,7 +35,7 @@ class TaskCreate extends Component {
             expanded: 0,
             userListe: [],
             visible: false,
-            picked: null,
+            picked: 'Proje Adı',
         }
         this.selectConfirm = this.selectConfirm.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
@@ -61,8 +61,12 @@ class TaskCreate extends Component {
     }
 
     onSelect = (picked) => {
+        debugger;
+        let item = this.props.projects.filter(x => {
+            return x.ID === picked;
+        });
         this.setState({
-            picked: picked,
+            picked: item[0].Name,
             visible: false
         })
     }
@@ -74,11 +78,22 @@ class TaskCreate extends Component {
     }
     render() {
         const { visible, picked } = this.state;
+        const options = [];
+        this.props.projects.forEach(element => {
+            options.push({
+                key: element.ID,
+                label: element.Name,
+            });
+        });
 
         return (
-            <Card style={{ backgroundColor: 'white', flexDirection: 'column', flex: 1 }}>
-                <CardSection style={{ flex: 1 }}>
-                    <ScrollView style={{ flex: 1 }}>
+        <View style={{ backgroundColor: 'white', flex: 1 }}>
+            <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
+                <View style={{
+                    flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 5,
+                    borderBottomWidth: 1, borderColor: '#ddd'
+                }}>
+                    <ScrollView style={{ flex: 3, marginLeft: 5 }}>
                         <Text style={styles.text}>Atanacak Kişi</Text>
                         <LabelSelect
                             title="Kullanıcı Adı"
@@ -100,64 +115,82 @@ class TaskCreate extends Component {
                                 >{item.Username}</LabelSelect.ModalItem>
                             )}
                         </LabelSelect>
+                    </ScrollView>
+                    <View style={{ flex: 1, margin: 5, justifyContent: 'center', alignItems: 'center' }}>
                         <TouchableOpacity style={styles.buttonContainer} onPress={this.onShow}>
-                            <Text style={styles.emailSubject}>Proje Adı</Text>
+                            <Text style={styles.emailSubject}>{picked}</Text>
                         </TouchableOpacity>
-                        <Text >{picked}</Text>
                         <ModalFilterPicker
                             visible={visible}
                             onSelect={this.onSelect}
                             onCancel={this.onCancel}
-                            options={this.props.projects}
+                            options={options}
+                            cancelButtonText='İptal'
+                            placeholderText='Proje Adı...'
                         />
-                    </ScrollView>
-                </CardSection>
-                <CardSection style={{ flex: 1 }}>
-                    <TextInput style={styles.textInputStyle}
+                    </View>
+                </View>
+                <View style={{
+                    borderBottomWidth: 1, borderColor: '#ddd'
+                    ,backgroundColor:'red'
+                }}>
+                    <Akira
+                        label={'Görev Başlığı'}
+                        borderColor={'#a5d1cc'}
+                        labelStyle={{ color: '#ac83c4' }}
+                    />
+
+                </View>
+                <View style={{
+                    margin: 5,
+                    borderBottomWidth: 1,
+                    borderColor: '#ddd',backgroundColor:'yellow'
+                }}>
+                    <Akira
+                        borderColor={'#a5d1cc'}
+                        labelStyle={{ color: '#ac83c4' }}
                         value={this.props.Title}
                         autoCorrect={false}
-                        placeholder={"Görev Başlığı"}
-                        onChangeText={text => this.props.taskUpdate({ prop: 'Title', value: text })} />
-                </CardSection>
-                <CardSection style={{ flex: 7 }}>
-                    <TextInput
-                        style={[styles.textInputStyle, { position: 'absolute', width: '100%', height: '100%' }]}
-                        value={this.props.Description}
-                        autoCorrect={false}
-                        editable={true}
-                        numberOfLines={5}
-                        placeholder={"Görev Açıklamasi"}
+                        label={"Görev Açıklaması"}
+                        multiline={true}
+                        numberOfLines={25}
+                        inputHeight={150}
                         onChangeText={text => this.props.taskUpdate({ prop: 'Description', value: text })} />
-                </CardSection>
-                <CardSection style={{ flex: 1 }}>
-                    <View style={{
-                        flexDirection: 'row',
-                        margin: 10,
-                        alignItems: 'center'
-                    }}>
-                        <TouchableOpacity style={styles.touchOpacityText} onPress={() => {
-                            console.log("press");
-                        }}>
-                            <Image source={require('../img/file.png')} />
-                        </TouchableOpacity >
-                        <TouchableOpacity style={styles.touchOpacityText} onPress={() => {
-                            console.log("press");
-                        }}>
-                            <Image source={require('../img/person.png')} />
-                        </TouchableOpacity >
-                        <TouchableOpacity style={styles.touchOpacityText} onPress={() => {
-                            console.log("press");
-                        }}>
-                            <Image source={require('../img/calendar.png')} />
-                        </TouchableOpacity >
-                        <TouchableOpacity style={[styles.touchOpacityText, {}]} onPress={() => {
-                            console.log("press");
-                        }}>
-                            <Image source={require('../img/send.png')} />
-                        </TouchableOpacity >
-                    </View>
-                </CardSection>
-            </Card>
+
+                </View>
+            </ScrollView>
+            <View style={{
+                flexDirection: 'row',
+                margin: 10,
+                alignItems: 'center',
+                margin: 5,
+                borderBottomWidth: 1,
+                borderColor: '#ddd'
+            }}>
+                <TouchableOpacity style={styles.touchOpacityText} onPress={() => {
+                    console.log("press");
+                }}>
+                    <Image source={require('../img/file.png')} />
+                </TouchableOpacity >
+                <TouchableOpacity style={styles.touchOpacityText} onPress={() => {
+                    console.log("press");
+                }}>
+                    <Image source={require('../img/person.png')} />
+                </TouchableOpacity >
+                <TouchableOpacity style={styles.touchOpacityText} onPress={() => {
+                    console.log("press");
+                }}>
+                    <Image source={require('../img/calendar.png')} />
+                </TouchableOpacity >
+
+                <TouchableOpacity style={[styles.touchOpacityText, { right: 0 }]} onPress={() => {
+                    console.log("press");
+                }}>
+                    <Image source={require('../img/send.png')} />
+                </TouchableOpacity >
+
+            </View>
+        </View>
         );
     };
 }
@@ -165,21 +198,21 @@ const styles = {
     textInputStyle: {
         flex: 1,
         margin: 10
-    }, searchInput: {
-        borderColor: '#CCC',
-        borderRadius: 20,
+    }, buttonContainer: {
+        borderRadius: 15,
+        marginLeft: 15,
+        marginRight: 15,
+        padding: 15,
         borderWidth: 1,
-        flex: 1,
-        marginLeft: 10,
-        paddingLeft: 60,
-        paddingRight: 60,
-    }, text: {
+        borderColor: '#6dc2a2'
+    },
+    text: {
         fontSize: 16,
         color: 'rgb(13, 131, 144)'
     },
     labelSelect: {
         marginTop: 5,
-        marginBottom: 20,
+        marginBottom: 10,
         padding: 5,
         borderWidth: 1,
         borderRadius: 6,
@@ -194,7 +227,7 @@ const styles = {
         padding: 10
     },
     emailSubject: {
-        color: 'rgba(0,0,0,0.5)'
+        color: 'rgb(13, 131, 144)'
     },
 }
 const mapStateProps = (state) => {
