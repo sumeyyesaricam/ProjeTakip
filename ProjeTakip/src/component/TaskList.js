@@ -6,13 +6,13 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { FloatingAction } from 'react-native-floating-action';
 import { connect } from 'react-redux';
-import { taskFetch } from '../actions';
+import { taskFetch,taskUpdate } from '../actions';
 import TaskItem from './TaskItem';
 
 
 class TaskList extends Component {
     componentWillMount() {
-        this.props.taskFetch({ personid: 1 });
+        this.props.taskFetch({ personid: this.props.user });
         this.createDataSource(this.props);
     }
     componentWillReceiveProps(nextProps) {
@@ -40,6 +40,8 @@ class TaskList extends Component {
                     onPressItem={
                         (name) => {
                             if (name === "fabTask") {
+                                this.props.taskUpdate({ prop: 'Title', value: '' });
+                                this.props.taskUpdate({ prop: 'Description', value: '' });
                                 Actions.taskCreate();
                             }
                         }
@@ -65,10 +67,11 @@ const actions = [{
     name: 'fabProject',
     position: 3
 }];
-const mapStateProps = ({ taskListResponse }) => {
+const mapStateProps = ({ taskListResponse,auth }) => {
+    const { user } = auth;
     const tasks = _.map(taskListResponse, (val, uid) => {
         return { ...val, uid }
     });
-    return { tasks };
+    return { tasks ,user};
 }
-export default connect(mapStateProps, { taskFetch })(TaskList);
+export default connect(mapStateProps, { taskFetch,taskUpdate })(TaskList);

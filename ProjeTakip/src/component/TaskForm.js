@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     View, Text, Image
 } from 'react-native';
-import { Card, CardSection, Input } from './common';
+import { CardSection } from './common';
 import { connect } from 'react-redux';
 import { taskUpdate, taskCreate } from '../actions';
 

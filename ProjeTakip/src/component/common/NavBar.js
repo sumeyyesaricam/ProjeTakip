@@ -6,14 +6,14 @@ import { Actions } from 'react-native-router-flux';
 import { CardSection } from './CardSection';
 import { Card } from './Card';
 
-const NavBar = ({task}) => {
-    ConfirmDelete = () => {
+const NavBar = ({ task }) => {
+    ConfirmDelete = (task) => {
         Alert.alert(
             'Uyarı',
             'Silmek istediğinden emin misin?',
             [
                 { text: 'İptal', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => this.props.taskDelete({ uid: this.props.task.ID }) },
+                { text: 'OK', onPress: () => this.props.taskDelete({ uid: task.ID }) },
             ],
             { cancelable: false }
         )
@@ -21,23 +21,23 @@ const NavBar = ({task}) => {
     return (
         <Card>
             <CardSection>
-                <TouchableOpacity  style={{ marginLeft: 250 }} onPress={() => {
-                    Actions.taskDetail({ task: {task} });
+                <TouchableOpacity style={{ marginLeft: 250 }} onPress={() => {
+                    Actions.taskDetail({ task: { task } });
                 }}>
                     <Image source={require('../../img/tick.png')} />
                 </TouchableOpacity >
-                <TouchableOpacity  style={{ marginLeft: 5 }} onPress={() => {
-                    Actions.taskDetail({ task: {task} });
+                <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => {
+                    Actions.taskDetail({ task: { task } });
                 }}>
                     <Image source={require('../../img/like.png')} />
                 </TouchableOpacity >
-                <TouchableOpacity  style={{ marginLeft: 5 }} onPress={() => {
-                    Actions.taskEdit({ task: {task} });
+                <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => {
+                    Actions.taskEdit({ task: { task } });
                 }}>
                     <Image source={require('../../img/edit.png')} />
                 </TouchableOpacity >
-                <TouchableOpacity  style={{ marginLeft: 5 }} onPress={() =>{
-                    {this.ConfirmDelete}
+                <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => {
+                    { this.ConfirmDelete(task) }
                 }}>
                     <Image source={require('../../img/setting.png')} />
                 </TouchableOpacity >

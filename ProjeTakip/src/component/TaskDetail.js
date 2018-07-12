@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import {
-    View, Text, Picker, Alert,ScrollView 
+    View, Text, Picker, Alert, ScrollView
 } from 'react-native';
 import Communications from 'react-native-communications';
 import { Card, CardSection, Button, NavBar } from './common';
@@ -31,9 +31,8 @@ class TaskDeatil extends Component {
         )
     }
     render() {
-
         return (
-            <ScrollView  style={{ backgroundColor: 'white' }}>
+            <ScrollView style={{ backgroundColor: 'white' }}>
                 <NavBar task={this.props.task} />
                 <Card>
                     <TaskForm {...this.props} />
@@ -42,12 +41,7 @@ class TaskDeatil extends Component {
         );
     };
 }
-const styles = {
-    pickerTextStyle: {
-        fontSize: 18,
-        paddingLeft: 20
-    }
-}
+
 const mapStateProps = (state) => {
     const { Title, Description, AssignsName, ProjectName } = state.taskForm;
     return { Title, Description, AssignsName, ProjectName };

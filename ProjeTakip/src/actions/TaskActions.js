@@ -9,17 +9,45 @@ export const taskUpdate = ({ prop, value }) => {
         payload: { prop, value }
     };
 };
-export const taskCreate = ({ name, phone, shift }) => {
-    const { currentUser } = firebase.auth();
+export const taskCreate = ({ Title, Description, ProjectID, AssignsID }) => {
+    //const { currentUser } = firebase.auth();
     return (dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/tasks`)
+        fetch(BASE_URL + '/Task/AddTask', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "Title": Title,
+                "Description": Description,
+                "AssignedDate": "2018-01-20",
+                "DueDate": "2018-01-20",
+                "ProjectID": ProjectID,
+                "AssignsID": "1",
+                "Status": "1",
+                "Type": "true",
+            })
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: TASK_CREATE
+                    });
+                    Actions.taskList({ type: 'replace' })
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        /*firebase.database().ref(`/users/${currentUser.uid}/tasks`)
             .push({ name, phone, shift })
             .then(() => {
                 dispatch({
                     type: TASK_CREATE
                 });
                 Actions.taskList({ type: 'replace' })
-            });
+            });*/
     }
 };
 
@@ -57,17 +85,47 @@ export const taskFetch = ({ personid }) => {
     }
 };
 
-export const taskSave = ({ name, phone, shift, uid }) => {
-    const { currentUser } = firebase.auth();
+export const taskSave = ({ Title, Description, ProjectID, AssignsID, ID }) => {
+    //const { currentUser } = firebase.auth();
     return (dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
+        fetch(BASE_URL + '/Task/EditTask', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "ID": ID,
+                "Title": Title,
+                "Description": Description,
+                "AssignedDate": "2018-01-20",
+                "DueDate": "2018-01-20",
+                "ProjectID": ProjectID,
+                "AssignsID": "1",
+                "Status": "1",
+                "Type": "true",
+            })
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: TASK_SAVE_SUCCESS
+                    });
+                    Actions.taskList({ type: 'replace' })
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+        /*firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
             .set({ name, phone, shift })
             .then(() => {
                 dispatch({
                     type: TASK_SAVE_SUCCESS
                 });
                 Actions.taskList({ type: 'replace' })
-            });
+            });*/
     }
 };
 

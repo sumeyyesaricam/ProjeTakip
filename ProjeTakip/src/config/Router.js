@@ -6,13 +6,14 @@ import TaskCreate from '../component/TaskCreate';
 import TaskEdit from '../component/TaskEdit';
 import { NavigationBar } from '../component/common';
 import TaskDetail from '../component/TaskDetail';
+import { taskUpdate, taskCreate, userFetch, projectFetch, addUser } from '../actions';
 
 
 class RouterComponent extends Component {
 
     render() {
         return (
-            <Router>
+            <Router  {...this.props}>
                 <Scene key="root" hideNavBar>
                     <Scene key="auth">
                         <Scene key="login" hideNavBar component={LoginForm} />
@@ -27,7 +28,8 @@ class RouterComponent extends Component {
                         <Scene key="taskCreate" hideNavBar component={TaskCreate} title="Create Task" />
                         <Scene key="taskEdit"
                             rightButtonImage={require('../img/tick.png')}
-                            onRight={() => Actions.taskCreate()}
+                            onRight={() => this.props.taskSave()
+                            }
                             component={TaskEdit} title="Görevi Düzenle" />
                         <Scene key="taskDetail" hideNavBar component={TaskDetail} />
 
